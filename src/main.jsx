@@ -82,6 +82,9 @@ function App() {
             </div>
           </form>
         )}
+        <p className="summary" role="status">
+          {tasks.filter((task) => task.status === 'done').length} de {tasks.length} tareas completadas
+        </p>
         <div className="board-tools">
           <label>
             Buscar tareas
