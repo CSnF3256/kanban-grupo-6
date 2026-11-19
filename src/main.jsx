@@ -16,8 +16,10 @@ function App() {
     }
   });
   const [draft, setDraft] = useState(null);
+  const [search, setSearch] = useState('');
   const [error, setError] = useState('');
   const [storageError, setStorageError] = useState(false);
+  const query = search.trim().toLocaleLowerCase('es');
 
   useEffect(() => {
     try {
@@ -80,17 +82,28 @@ function App() {
             </div>
           </form>
         )}
+        <div className="board-tools">
+          <label>
+            Buscar tareas
+            <input type="search" placeholder="Título o descripción" value={search}
+              onChange={(event) => setSearch(event.target.value)} />
+          </label>
+        </div>
         <div className="board">
           {statuses.map(({ id, label }) => {
             const columnTasks = tasks.filter((task) => task.status === id);
+            const visibleTasks = columnTasks.filter(({ title, description }) =>
+              [title, description].some((value) => value.toLocaleLowerCase('es').includes(query)));
             return (
               <section key={id} className={`column ${id}`} aria-labelledby={`column-${id}`}>
                 <div className="column-header">
                   <h2 id={`column-${id}`}>{label}</h2>
                   <span className="count">{columnTasks.length}</span>
                 </div>
-                {columnTasks.length === 0 && <p className="empty">Sin tareas</p>}
-                {columnTasks.map((task) => (
+                {visibleTasks.length === 0 && (
+                  <p className="empty">{columnTasks.length ? 'Sin coincidencias' : 'Sin tareas'}</p>
+                )}
+                {visibleTasks.map((task) => (
                   <article className="card" key={task.id}>
                     <h3>{task.title}</h3>
                     {task.description && <p>{task.description}</p>}
