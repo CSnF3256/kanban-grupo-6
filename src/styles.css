@@ -27,6 +27,7 @@ h2 { font-size: 1.05rem; }
 h3 { font-size: 1rem; }
 p { color: #475569; }
 .board { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; align-items: start; }
+.summary { margin-bottom: .8rem; font-size: .9rem; font-weight: 600; }
 .column { background: #eef2f7; border-radius: .8rem; padding: 1rem; min-height: 13rem; }
 .column-header { border-top: .25rem solid #637695; padding-top: .7rem; }
 .progress .column-header { border-color: #365bd0; }
