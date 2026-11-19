@@ -6,7 +6,7 @@ const [task] = saveTask([], draft);
 
 describe('Tareas del tablero', () => {
   it('crea una tarea pendiente y limpia su título', () => {
-    expect(task).toMatchObject({ title: 'Preparar entrega', status: 'done' });
+    expect(task).toMatchObject({ title: 'Preparar entrega', status: 'pending' });
     expect(task.id).toBeTruthy();
   });
 
